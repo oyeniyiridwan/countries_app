@@ -1,9 +1,20 @@
 import 'package:countries_app/Details.dart';
+import 'package:countries_app/countries.dart';
 import 'package:countries_app/homePage.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    /// Providers are above [MyApp] instead of inside it, so that tests
+    /// can use [MyApp] while mocking the providers
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => Countries()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -15,26 +26,45 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.system,
+      darkTheme: ThemeData(
+        cardColor: Colors.white10,
+        canvasColor: Colors.white10,
+        iconTheme: const IconThemeData(color: Colors.white),
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(color: Colors.white, fontSize: 25),
+          labelSmall: TextStyle(
+              color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
+          bodySmall: TextStyle(
+              color: Colors.white, fontSize: 17, fontWeight: FontWeight.w300),
+          bodyMedium: TextStyle(
+              color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
+          bodyLarge: TextStyle(
+              color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
+        ),
+        scaffoldBackgroundColor: const Color(0xff000f24),
+      ),
       theme: ThemeData(
-          // This is the theme of your application.
-          //
-          // Try running your application with "flutter run". You'll see the
-          // application has a blue toolbar. Then, without quitting the app, try
-          // changing the primarySwatch below to Colors.green and then invoke
-          // "hot reload" (press "r" in the console where you ran "flutter run",
-          // or simply save your changes to "hot reload" in a Flutter IDE).
-          // Notice that the counter didn't reset back to zero; the application
-          // is not restarted
-          iconTheme: const IconThemeData(color: Colors.white),
-          textTheme: const TextTheme(
-            titleMedium: TextStyle(color: Colors.white, fontSize: 25),
-            bodySmall: TextStyle(
-                color: Colors.white, fontSize: 17, fontWeight: FontWeight.w300),
-            bodyMedium: TextStyle(
-                color: Colors.white, fontSize: 17, fontWeight: FontWeight.bold),
-          ),
-          scaffoldBackgroundColor: const Color(0xff000f24),
-          shadowColor: Colors.transparent),
+        cardColor: Colors.black12,
+        canvasColor: const Color(0xfff3f4f8),
+        iconTheme: const IconThemeData(color: Color(0xff000f24)),
+        textTheme: const TextTheme(
+          titleMedium: TextStyle(color: Color(0xff000f24), fontSize: 25),
+          bodySmall: TextStyle(
+              color: Color(0xff000f24),
+              fontSize: 17,
+              fontWeight: FontWeight.w300),
+          bodyMedium: TextStyle(
+              color: Color(0xff000f24),
+              fontSize: 17,
+              fontWeight: FontWeight.bold),
+          bodyLarge: TextStyle(
+              color: Color(0xff000f24),
+              fontSize: 25,
+              fontWeight: FontWeight.bold),
+        ),
+        scaffoldBackgroundColor: const Color(0xffffffff),
+      ),
       routes: {
         MyHomePage.routeHomePage: (context) => MyHomePage(),
         DetailPage.routeDetailPage: (context) => DetailPage()
