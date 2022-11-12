@@ -4,7 +4,7 @@ class Country with ChangeNotifier {
   String name;
   String capital;
   String timezones;
-  String currency;
+  String? currency;
   String region;
   String? subRegion;
   int population;

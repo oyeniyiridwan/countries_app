@@ -33,17 +33,18 @@ Widget searchL(BuildContext context) {
   );
 }
 
-Widget card(BuildContext context, String title, Icon icon, Widget build) {
+Widget card(BuildContext context, String title, Widget icon, Widget build) {
   return GestureDetector(
     onTap: () {
+      FocusScope.of(context).unfocus();
       showModalBottomSheet(
           context: context,
           builder: (context) => build,
           isScrollControlled: true,
           shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(20),
-                  topLeft: Radius.circular(20))));
+                  topRight: Radius.circular(20), topLeft: Radius.circular(20))),
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor);
     },
     child: Card(
       elevation: 2,
@@ -86,7 +87,7 @@ Widget listCountry(BuildContext context, Country country) {
       },
       child: Container(
         color: Colors.transparent,
-        height: 60,
+        height: 50,
         width: 400,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

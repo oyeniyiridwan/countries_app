@@ -21,6 +21,7 @@ class _DetailPageState extends State<DetailPage> {
     for (int i = 0; i < 2; i++) {
       pics.add(widget.country.imageUrl[i]!);
     }
+
     for (int p = 0; p < (widget.country.language.length); p++) {
       language = "$language ${widget.country.language[p]}";
       if (p < widget.country.language.length - 1) {
@@ -178,7 +179,7 @@ class _DetailPageState extends State<DetailPage> {
             details(
                 context, "Independence", widget.country.independent.toString()),
             details(context, "Area", widget.country.area.toString()),
-            details(context, "Currency", widget.country.currency),
+            details(context, "Currency", widget.country.currency.toString()),
             const SizedBox(
               height: 20,
             ),

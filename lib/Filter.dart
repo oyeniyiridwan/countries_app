@@ -1,4 +1,7 @@
+import 'package:countries_app/countries.dart';
+import 'package:countries_app/moreUseable.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Filter extends StatefulWidget {
   const Filter({Key? key}) : super(key: key);
@@ -12,9 +15,16 @@ bool subRegion = false;
 bool capital = false;
 bool currency = false;
 
+// List<String> regionL = [];
+// List<String> subRegionL = [];
+// List<String> capitalL = [];
+// List<String> currencyL = [];
+
 class _FilterState extends State<Filter> {
   @override
   Widget build(BuildContext context) {
+    final count = Provider.of<Countries>(context, listen: true);
+    final boolData = count.checks;
     return Container(
       // height: 450,
       child: SingleChildScrollView(
@@ -26,9 +36,9 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Filter"),
+                  const Text("Filter"),
                   IconButton(
-                    icon: Icon(Icons.dangerous_sharp),
+                    icon: const Icon(Icons.dangerous_sharp),
                     onPressed: () {
                       region = false;
                       subRegion = false;
@@ -43,9 +53,9 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Region"),
+                  const Text("Region"),
                   IconButton(
-                    icon: Icon(Icons.arrow_downward),
+                    icon: Icon(region ? Icons.expand_less : Icons.expand_more),
                     onPressed: () {
                       setState(() {
                         region = !region;
@@ -58,20 +68,18 @@ class _FilterState extends State<Filter> {
             if (region)
               Column(
                 children: [
-                  continentList(
-                      context, "Africa", Icon(Icons.check_box_outline_blank)),
-                  continentList(context, "Antarctica",
-                      Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "Asia", Icon(Icons.check_box_outline_blank)),
-                  continentList(context, "Australia",
-                      Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "Europe", Icon(Icons.check_box_outline_blank)),
-                  continentList(context, "North America",
-                      Icon(Icons.check_box_outline_blank)),
-                  continentList(context, "South America",
-                      Icon(Icons.check_box_outline_blank)),
+                  FilteredSelectionRows(
+                      index: 0, lists: count.regionL, location: "Africa"),
+                  FilteredSelectionRows(
+                      index: 1, lists: count.regionL, location: "Americas"),
+                  FilteredSelectionRows(
+                      index: 2, lists: count.regionL, location: "Antarctic"),
+                  FilteredSelectionRows(
+                      index: 3, lists: count.regionL, location: "Asia"),
+                  FilteredSelectionRows(
+                      index: 4, lists: count.regionL, location: "Europe"),
+                  FilteredSelectionRows(
+                      index: 5, lists: count.regionL, location: "Oceania"),
                 ],
               ),
             Padding(
@@ -79,9 +87,10 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Sub Region"),
+                  const Text("Sub Region"),
                   IconButton(
-                    icon: Icon(Icons.arrow_downward),
+                    icon:
+                        Icon(subRegion ? Icons.expand_less : Icons.expand_more),
                     onPressed: () {
                       setState(() {
                         subRegion = !subRegion;
@@ -94,16 +103,32 @@ class _FilterState extends State<Filter> {
             if (subRegion)
               Column(
                 children: [
-                  continentList(
-                      context, "GMT+1:00", Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "GMT+2:00", Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "GMT+3:00", Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "GMT+4:00", Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "GMT+5:00", Icon(Icons.check_box_outline_blank)),
+                  FilteredSelectionRows(
+                      index: 6,
+                      lists: count.subRegionL,
+                      location: "Australia and New Zealand"),
+                  FilteredSelectionRows(
+                      index: 7, lists: count.subRegionL, location: "Caribbean"),
+                  FilteredSelectionRows(
+                      index: 8,
+                      lists: count.subRegionL,
+                      location: "Eastern Africa"),
+                  FilteredSelectionRows(
+                      index: 9,
+                      lists: count.subRegionL,
+                      location: "Northern Europe"),
+                  FilteredSelectionRows(
+                      index: 10,
+                      lists: count.subRegionL,
+                      location: "South America"),
+                  FilteredSelectionRows(
+                      index: 11,
+                      lists: count.subRegionL,
+                      location: "South Asia"),
+                  FilteredSelectionRows(
+                      index: 12,
+                      lists: count.subRegionL,
+                      location: "South Eastern Asia")
                 ],
               ),
             Padding(
@@ -111,9 +136,9 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Capital"),
+                  const Text("Capital"),
                   IconButton(
-                    icon: Icon(Icons.arrow_downward),
+                    icon: Icon(capital ? Icons.expand_less : Icons.expand_more),
                     onPressed: () {
                       setState(() {
                         capital = !capital;
@@ -126,16 +151,14 @@ class _FilterState extends State<Filter> {
             if (capital)
               Column(
                 children: [
-                  continentList(
-                      context, "GMT+1:00", Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "GMT+2:00", Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "GMT+3:00", Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "GMT+4:00", Icon(Icons.check_box_outline_blank)),
-                  continentList(
-                      context, "GMT+5:00", Icon(Icons.check_box_outline_blank)),
+                  FilteredSelectionRows(
+                      index: 13, lists: count.capitalL, location: "Islamabad"),
+                  FilteredSelectionRows(
+                      index: 14, lists: count.capitalL, location: "Lusaka"),
+                  FilteredSelectionRows(
+                      index: 15, lists: count.capitalL, location: "Oslo"),
+                  FilteredSelectionRows(
+                      index: 16, lists: count.capitalL, location: "Podgorica")
                 ],
               ),
             Padding(
@@ -143,9 +166,10 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Currency"),
+                  const Text("Currency"),
                   IconButton(
-                    icon: Icon(Icons.arrow_downward),
+                    icon:
+                        Icon(currency ? Icons.expand_less : Icons.expand_more),
                     onPressed: () {
                       setState(() {
                         currency = !currency;
@@ -157,21 +181,28 @@ class _FilterState extends State<Filter> {
             ),
             if (currency)
               Column(children: [
-                continentList(
-                    context, "GMT+1:00", Icon(Icons.check_box_outline_blank)),
-                continentList(
-                    context, "GMT+2:00", Icon(Icons.check_box_outline_blank)),
-                continentList(
-                    context, "GMT+3:00", Icon(Icons.check_box_outline_blank)),
-                continentList(
-                    context, "GMT+4:00", Icon(Icons.check_box_outline_blank)),
-                continentList(
-                    context, "GMT+5:00", Icon(Icons.check_box_outline_blank)),
+                FilteredSelectionRows(
+                    index: 17, lists: count.currencyL, location: "Euro"),
+                FilteredSelectionRows(
+                    index: 18,
+                    lists: count.currencyL,
+                    location: "New Zealand dollar"),
+                FilteredSelectionRows(
+                    index: 19,
+                    lists: count.currencyL,
+                    location: "United State dollar")
               ]),
-            if (region || subRegion)
+            SizedBox(
+              height: 10,
+            ),
+            if (region || subRegion || capital || currency)
               Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    count.clear();
+                    count.filtered();
+                    Navigator.of(context).pop();
+                  },
                   child: Card(
                     shape: RoundedRectangleBorder(
                       side: BorderSide(color: Theme.of(context).cardColor),
@@ -192,52 +223,52 @@ class _FilterState extends State<Filter> {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    count.filtered();
+                    Navigator.of(context).pop();
+                    print("re: ${count.regionL}");
+                    print("sub: ${count.subRegionL}");
+                    print(count.capitalL);
+                    print(count.currencyL);
+                  },
                   child: Card(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5),
                     ),
                     borderOnForeground: false,
                     color: Colors.deepOrange,
-                    child: SizedBox(
+                    child: const SizedBox(
                       height: 50,
                       width: 250,
                       child: Center(
                         child: Text(
                           "Show results",
-                          style:
-                              TextStyle(color: Theme.of(context).canvasColor),
+                          style: TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
                   ),
                 ),
               ]),
-            SizedBox(
-              height: 30,
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                height: 5,
+                width: 150,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(300)),
+                  child: Center(
+                    child: Divider(
+                      thickness: 7,
+                      color: Theme.of(context).disabledColor,
+                    ),
+                  ),
+                ),
+              ),
             )
           ],
         ),
       ),
     );
   }
-}
-
-Widget continentList(BuildContext context, String continent, Icon icon) {
-  return SizedBox(
-    height: 35,
-    child: Padding(
-      padding: const EdgeInsets.only(left: 10, right: 10),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            continent,
-            style: TextStyle(color: Theme.of(context).disabledColor),
-          ),
-          IconButton(icon: icon, onPressed: () {})
-        ],
-      ),
-    ),
-  );
 }

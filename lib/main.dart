@@ -1,3 +1,4 @@
+import 'package:countries_app/Country.dart';
 import 'package:countries_app/Details.dart';
 import 'package:countries_app/countries.dart';
 import 'package:countries_app/homePage.dart';
@@ -23,12 +24,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<Countries>(context);
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.system,
+      themeMode: themeProvider.isDarkMode ? ThemeMode.system : ThemeMode.dark,
       darkTheme: ThemeData(
-        disabledColor: Colors.white38,
+        disabledColor: Colors.white70,
         cardColor: Colors.white10,
         canvasColor: Colors.white10,
         iconTheme: const IconThemeData(color: Colors.white),
@@ -48,7 +50,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xff000f24),
       ),
       theme: ThemeData(
-        disabledColor: Colors.black38,
+        disabledColor: Colors.black54,
         cardColor: Colors.black12,
         canvasColor: const Color(0xfff3f4f8),
         iconTheme: const IconThemeData(color: Color(0xff000f24)),

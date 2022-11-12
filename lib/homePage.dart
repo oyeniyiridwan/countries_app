@@ -1,8 +1,8 @@
 import 'package:countries_app/Country.dart';
 import 'package:countries_app/Filter.dart';
+import 'package:countries_app/Languages.dart';
 import 'package:countries_app/countries.dart';
 import 'package:countries_app/useable.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -22,13 +22,15 @@ class _MyHomePageState extends State<MyHomePage> {
     Provider.of<Countries>(context, listen: false).fetchCountries();
   }
 
+  final TextEditingController _textEditingController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     final count = Provider.of<Countries>(context, listen: true);
     final countData = count.items;
-    print(height);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -56,53 +58,62 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 trailing: IconButton(
                   icon: Icon(
-                    Icons.dark_mode_outlined,
+                    count.isDarkMode ? Icons.sunny : Icons.dark_mode_outlined,
                     color: Theme.of(context).iconTheme.color,
                     size: 30,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      count.isDarkMode
+                          ? count.setLightMode()
+                          : count.setDarkMode();
+                    });
+                  },
                 ),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(10),
-              child: GestureDetector(
-                onTap: () {
-                  setState(() {
-                    search = !search;
-                  });
-                },
-                child: Container(
+              child: Container(
                   height: 50,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: Theme.of(context).canvasColor),
-                  child: search
-                      ? TextFormField(
-                          cursorColor: Theme.of(context).iconTheme.color,
-                          decoration: const InputDecoration(
-                            contentPadding: EdgeInsets.all(10),
-                            border: InputBorder.none,
-                          ),
-                          autofocus: true,
-                          onFieldSubmitted: (_) {
-                            setState(() {
-                              search = !search;
-                            });
-                          },
-                        )
-                      : searchL(context),
-                ),
-              ),
+                  child: TextFormField(
+                    onChanged: (value) {
+                      count.onChange(value);
+                    },
+                    controller: _textEditingController,
+                    cursorColor: Theme.of(context).iconTheme.color,
+                    decoration: const InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      border: InputBorder.none,
+                    ),
+                    // autofocus: true,
+                    // onFieldSubmitted: (_) {
+                    //   setState(() {
+                    //     search = !search;
+                    //   }
+                    //   );
+                    // },
+                  )),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  card(context, "EN", const Icon(Icons.language), Filter()),
-                  card(context, "Filter", const Icon(Icons.filter_list_alt),
-                      Filter())
+                  card(
+                    context,
+                    "EN",
+                    const Icon(Icons.language),
+                    const Languages(),
+                  ),
+                  card(
+                      context,
+                      "Filter",
+                      const ImageIcon(AssetImage("images/filter.png")),
+                      const Filter())
                 ],
               ),
             ),
@@ -110,6 +121,22 @@ class _MyHomePageState extends State<MyHomePage> {
               height: height - 230,
               child: buildListCountry(context, countData),
             ),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: SizedBox(
+                height: 5,
+                width: 150,
+                child: ClipRRect(
+                  borderRadius: const BorderRadius.all(Radius.circular(300)),
+                  child: Center(
+                    child: Divider(
+                      thickness: 7,
+                      color: Theme.of(context).disabledColor,
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),
