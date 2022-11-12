@@ -31,6 +31,7 @@ class Countries with ChangeNotifier {
         for (var value in extractData[i]["languages"].values) {
           language.add(value);
         }
+        language.removeLast();
 
         for (var value in extractData[i]["currencies"].values) {
           currency = value["name"]!;
@@ -53,11 +54,13 @@ class Countries with ChangeNotifier {
             independent: extractData[i]["independent"],
             imageUrl: [
               extractData[i]["flags"]["png"],
-              extractData[i]["maps"]["googleMaps"],
-              extractData[i]["coatOfArms"]["png"]
+              extractData[i]["coatOfArms"]["png"].toString(),
+              // extractData[i]["maps"]["googleMaps"],
             ]));
       }
+      loadedCountry.sort((a, b) => a.name.compareTo(b.name));
       _items = loadedCountry;
+      notifyListeners();
       // print(loadedCountry[1].currency);
     } catch (error) {
       rethrow;

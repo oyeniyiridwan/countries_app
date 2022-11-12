@@ -1,8 +1,10 @@
+import 'package:countries_app/Country.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key? key}) : super(key: key);
+  Country country;
+  DetailPage({required this.country, Key? key}) : super(key: key);
   static const routeDetailPage = "/detail";
 
   @override
@@ -10,19 +12,32 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  List<String> pics = [
-    "images/goat.jpg",
-    "images/delete.jfif",
-    "images/bike7.png"
-  ];
+  List<String> pics = [];
+
   int _currentIndex = 0;
+  String language = "";
+  @override
+  void initState() {
+    for (int i = 0; i < 2; i++) {
+      pics.add(widget.country.imageUrl[i]!);
+    }
+    for (int p = 0; p < (widget.country.language.length); p++) {
+      language = "$language ${widget.country.language[p]}";
+      if (p < widget.country.language.length - 1) {
+        language = "$language,";
+      }
+    }
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    print(pics);
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
       body: SingleChildScrollView(
-        physics: ScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        physics: const ScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
         dragStartBehavior: DragStartBehavior.start,
         child: Column(
           children: [
@@ -39,11 +54,13 @@ class _DetailPageState extends State<DetailPage> {
                         Icons.arrow_back,
                         color: Theme.of(context).iconTheme.color,
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    Text("Title",
+                    Text(widget.country.name,
                         style: Theme.of(context).textTheme.titleMedium),
-                    SizedBox(width: 50),
+                    const SizedBox(width: 50),
                   ],
                 ),
               ),
@@ -56,12 +73,16 @@ class _DetailPageState extends State<DetailPage> {
                   child: Stack(
                     // fit: StackFit.expand,
                     children: [
-                      SizedBox(
-                        height: 200,
-                        width: width,
-                        child: Image(
-                          image: AssetImage(pics[_currentIndex]),
-                          fit: BoxFit.cover,
+                      Center(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(20),
+                          child: SizedBox(
+                              height: 220,
+                              width: _currentIndex == 1 ? width * 0.4 : width,
+                              child: Image.network(
+                                pics[_currentIndex],
+                                fit: BoxFit.fitWidth,
+                              )),
                         ),
                       ),
                       Positioned(
@@ -69,11 +90,12 @@ class _DetailPageState extends State<DetailPage> {
                         bottom: 75,
                         child: CircleAvatar(
                           backgroundColor: Colors.grey,
-                          radius: 25,
+                          radius: 20,
                           child: Center(
                             child: IconButton(
                               icon: Icon(
                                 Icons.arrow_back_ios,
+                                size: 20,
                                 color: Theme.of(context).iconTheme.color,
                               ),
                               onPressed: () {
@@ -92,12 +114,13 @@ class _DetailPageState extends State<DetailPage> {
                         bottom: 75,
                         child: CircleAvatar(
                           backgroundColor: Colors.grey,
-                          radius: 25,
+                          radius: 20,
                           child: Center(
                             child: IconButton(
                               icon: Icon(
                                 Icons.arrow_forward_ios,
                                 color: Theme.of(context).iconTheme.color,
+                                size: 20,
                               ),
                               onPressed: () {
                                 if (_currentIndex < (pics.length - 1)) {
@@ -109,35 +132,60 @@ class _DetailPageState extends State<DetailPage> {
                             ),
                           ),
                         ),
+                      ),
+                      Positioned(
+                        bottom: 20,
+                        left: (width - 80) / 2,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              ".",
+                              style: TextStyle(
+                                  fontSize: 50,
+                                  color: _currentIndex == 0
+                                      ? Colors.white
+                                      : Colors.white38),
+                            ),
+                            Text(
+                              ".",
+                              style: TextStyle(
+                                  fontSize: 50,
+                                  color: _currentIndex == 1
+                                      ? Colors.white
+                                      : Colors.white38),
+                            )
+                          ],
+                        ),
                       )
                     ],
                   )),
             ),
-            details(context, "Population", "ade"),
-            details(context, "Region", "ade"),
-            details(context, "Capital", "ade"),
-            details(context, "Motto", "ade"),
+            details(
+                context, "Population", widget.country.population.toString()),
+            details(context, "Region", widget.country.region),
+            details(context, "Capital", widget.country.capital),
+            details(context, "Sub-region", widget.country.subRegion.toString()),
             const SizedBox(
               height: 25,
             ),
-            details(context, "Official language", "ade"),
-            details(context, "Ethic group", "ade"),
-            details(context, "Religion", "ade"),
-            details(context, "Government", "ade"),
+            details(context, "Official language", language),
+            details(context, "Ethic group", widget.country.ethic),
             const SizedBox(
               height: 20,
             ),
-            details(context, "Independence", "ade"),
-            details(context, "Area", "ade"),
-            details(context, "Currency", "ade"),
-            details(context, "GDP", "ade"),
+            details(
+                context, "Independence", widget.country.independent.toString()),
+            details(context, "Area", widget.country.area.toString()),
+            details(context, "Currency", widget.country.currency),
             const SizedBox(
               height: 20,
             ),
-            details(context, "Time zone", "ade"),
-            details(context, "Date format", "ade"),
-            details(context, "Dialing code", "ade"),
-            details(context, "Driving side", "ade"),
+            details(context, "Time zone", widget.country.timezones),
+            details(context, "Date format", "dd/mm/yyyy"),
+            details(context, "Dialing code", widget.country.dialingCode),
+            details(context, "Driving side", widget.country.carSide),
             const SizedBox(
               height: 20,
             ),
