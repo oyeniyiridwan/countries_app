@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'package:countries_app/Country.dart';
+import 'package:countries_app/Model/Country.dart';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
 
 class Countries with ChangeNotifier {
   List<Country> _items = [];
@@ -13,7 +11,7 @@ class Countries with ChangeNotifier {
     return [..._search];
   }
 
-  bool _isDarkMode = false;
+  bool _isDarkMode = true;
   get isDarkMode {
     return _isDarkMode;
   }
@@ -131,7 +129,6 @@ class Countries with ChangeNotifier {
   }
 
   Future<void> fetchCountries() async {
-    var dio = Dio();
     final url = Uri.parse("https://restcountries.com/v3.1/all");
     final List<Country> loadedCountry = [];
     try {

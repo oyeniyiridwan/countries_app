@@ -1,42 +1,10 @@
-import 'package:countries_app/Country.dart';
-import 'package:countries_app/Details.dart';
+import 'package:countries_app/Model/Country.dart';
+import 'package:countries_app/View/Screens/Details.dart';
 import 'package:flutter/material.dart';
-
-Widget searchL(BuildContext context) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    children: [
-      Expanded(
-        flex: 1,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: Icon(
-              Icons.search,
-              color: Theme.of(context).iconTheme.color,
-            ),
-          ),
-        ),
-      ),
-      Expanded(
-        flex: 2,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: Text(
-            "Search Country",
-            style: Theme.of(context).textTheme.bodySmall,
-          ),
-        ),
-      ),
-    ],
-  );
-}
 
 Widget card(BuildContext context, String title, Widget icon, Widget build) {
   return GestureDetector(
     onTap: () {
-      FocusScope.of(context).unfocus();
       showModalBottomSheet(
           context: context,
           builder: (context) => build,

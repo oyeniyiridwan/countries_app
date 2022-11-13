@@ -1,7 +1,7 @@
-import 'package:countries_app/Country.dart';
-import 'package:countries_app/Details.dart';
-import 'package:countries_app/countries.dart';
-import 'package:countries_app/homePage.dart';
+import 'package:countries_app/Model/Country.dart';
+import 'package:countries_app/View/Screens/Details.dart';
+import 'package:countries_app/View/countries.dart';
+import 'package:countries_app/View/Screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,11 +30,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: themeProvider.isDarkMode ? ThemeMode.system : ThemeMode.dark,
       darkTheme: ThemeData(
+        bottomAppBarColor: Colors.white70,
         disabledColor: Colors.white70,
         cardColor: Colors.white10,
         canvasColor: Colors.white10,
         iconTheme: const IconThemeData(color: Colors.white),
         textTheme: const TextTheme(
+          titleLarge: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
           titleMedium: TextStyle(color: Colors.white, fontSize: 18),
           labelSmall: TextStyle(
               color: Colors.white, fontSize: 12, fontWeight: FontWeight.bold),
@@ -45,16 +48,22 @@ class MyApp extends StatelessWidget {
           bodyMedium: TextStyle(
               color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),
           bodyLarge: TextStyle(
-              color: Colors.white, fontSize: 25, fontWeight: FontWeight.bold),
+              color: Colors.white,
+              fontSize: 25,
+              fontFamily: "ElsieSwashCaps",
+              fontWeight: FontWeight.bold),
         ),
         scaffoldBackgroundColor: const Color(0xff000f24),
       ),
       theme: ThemeData(
         disabledColor: Colors.black54,
         cardColor: Colors.black12,
+        bottomAppBarColor: Colors.black87,
         canvasColor: const Color(0xfff3f4f8),
         iconTheme: const IconThemeData(color: Color(0xff000f24)),
         textTheme: const TextTheme(
+          titleLarge: TextStyle(
+              color: Colors.black87, fontSize: 20, fontWeight: FontWeight.bold),
           labelMedium: TextStyle(
               color: Colors.black87, fontSize: 13, fontWeight: FontWeight.bold),
           labelSmall: TextStyle(
@@ -73,6 +82,7 @@ class MyApp extends StatelessWidget {
           bodyLarge: TextStyle(
               color: Color(0xff000f24),
               fontSize: 25,
+              fontFamily: "ElsieSwashCaps",
               fontWeight: FontWeight.bold),
         ),
         scaffoldBackgroundColor: const Color(0xffffffff),

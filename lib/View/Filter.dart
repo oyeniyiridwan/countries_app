@@ -1,5 +1,5 @@
-import 'package:countries_app/countries.dart';
-import 'package:countries_app/moreUseable.dart';
+import 'package:countries_app/View/countries.dart';
+import 'package:countries_app/ViewModel/moreUseable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,9 +36,15 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Filter"),
+                  Text(
+                    "Filter",
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
                   IconButton(
-                    icon: const Icon(Icons.dangerous_sharp),
+                    icon: const Icon(
+                      Icons.dangerous_sharp,
+                      color: Colors.grey,
+                    ),
                     onPressed: () {
                       region = false;
                       subRegion = false;
@@ -53,9 +59,14 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Region"),
+                  const Text(
+                    "Region",
+                    style: TextStyle(fontWeight: FontWeight.normal),
+                  ),
                   IconButton(
-                    icon: Icon(region ? Icons.expand_less : Icons.expand_more),
+                    icon: Icon(
+                      region ? Icons.expand_less : Icons.expand_more,
+                    ),
                     onPressed: () {
                       setState(() {
                         region = !region;
@@ -87,7 +98,10 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Sub Region"),
+                  const Text("Sub Region",
+                      style: TextStyle(
+                        fontWeight: FontWeight.normal,
+                      )),
                   IconButton(
                     icon:
                         Icon(subRegion ? Icons.expand_less : Icons.expand_more),
@@ -136,7 +150,8 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Capital"),
+                  const Text("Capital",
+                      style: TextStyle(fontWeight: FontWeight.normal)),
                   IconButton(
                     icon: Icon(capital ? Icons.expand_less : Icons.expand_more),
                     onPressed: () {
@@ -166,7 +181,8 @@ class _FilterState extends State<Filter> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text("Currency"),
+                  const Text("Currency",
+                      style: TextStyle(fontWeight: FontWeight.normal)),
                   IconButton(
                     icon:
                         Icon(currency ? Icons.expand_less : Icons.expand_more),
@@ -260,7 +276,7 @@ class _FilterState extends State<Filter> {
                   child: Center(
                     child: Divider(
                       thickness: 7,
-                      color: Theme.of(context).disabledColor,
+                      color: Theme.of(context).bottomAppBarColor,
                     ),
                   ),
                 ),
