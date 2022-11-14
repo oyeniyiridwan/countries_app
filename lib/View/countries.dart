@@ -79,6 +79,7 @@ class Countries with ChangeNotifier {
         _filtered.addAll(_items.where((country) {
           return country.region == regionL[i];
         }).toList());
+        _filtered.sort((a, b) => a.name.compareTo(b.name));
       }
     }
     if (subRegionL.isNotEmpty) {
@@ -87,8 +88,9 @@ class Countries with ChangeNotifier {
         temp.addAll(_filtered.where((country) {
           return country.subRegion == subRegionL[j];
         }).toList());
-        _filtered = temp;
       }
+      temp.sort((a, b) => a.name.compareTo(b.name));
+      _filtered = temp;
     }
     if (capitalL.isNotEmpty) {
       List<Country> temp = [];
@@ -96,8 +98,9 @@ class Countries with ChangeNotifier {
         temp.addAll(_filtered.where((country) {
           return country.capital == capitalL[k];
         }).toList());
-        _filtered = temp;
       }
+      temp.sort((a, b) => a.name.compareTo(b.name));
+      _filtered = temp;
     }
     if (currencyL.isNotEmpty) {
       List<Country> temp = [];
@@ -105,8 +108,9 @@ class Countries with ChangeNotifier {
         temp.addAll(_filtered.where((country) {
           return country.currency == currencyL[l];
         }).toList());
-        _filtered = temp;
       }
+      temp.sort((a, b) => a.name.compareTo(b.name));
+      _filtered = temp;
     }
     _search = _filtered;
     notifyListeners();
