@@ -49,5 +49,12 @@ https://drive.google.com/file/d/1qq5JuQtqHc9DKeEi77dKgISjth8vkjir/view?usp=share
 https://appetize.io/app/uj45vj37owv4uogiqxqzziyqf4?device=pixel4&osVersion=11.0&scale=75  
 
 # Images
-![]
-(images/1.png)
+![1](https://user-images.githubusercontent.com/61723507/201590998-807fe485-ef58-477c-8a83-bd90a05b5d41.png)
+![2](https://user-images.githubusercontent.com/61723507/201591030-dc8bb78d-c715-4b24-a2f6-cb0508c1750c.png)
+![3](https://user-images.githubusercontent.com/61723507/201591046-6473ec3d-9a22-41ac-b3ea-2d9fb71c8a93.png)
+![4](https://user-images.githubusercontent.com/61723507/201591063-ade46b8f-8859-4355-9167-f8f482426465.png)
+![5](https://user-images.githubusercontent.com/61723507/201591081-0355a17b-bb7d-4d38-8e3![6](https://user-images.githubusercontent.com/61723507/201591108-14cdbf1a-04ac-4e9c-9775-ad4f78342627.png)
+4-e002ad2b45f1.png)
+![7](https://user-images.githubusercontent.com/61723507/201591132-c58198b7-85e0-460c-af4a-fc47fb9086fb.png)
+
+
