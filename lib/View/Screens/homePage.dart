@@ -1,6 +1,6 @@
 import 'package:countries_app/View/Filter.dart';
 import 'package:countries_app/View/Languages.dart';
-import 'package:countries_app/ViewModel/useable.dart';
+import 'package:countries_app/ViewModel/Widgets.dart';
 import 'package:countries_app/View/countries.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +42,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
     final count = Provider.of<Countries>(context, listen: true);
     final countData = count.items;
 
@@ -76,7 +75,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   IconButton(
                     icon: count.isDarkMode
                         ? ImageIcon(
-                            AssetImage(
+                            const AssetImage(
                               "images/sun.png",
                             ),
                             color: Theme.of(context).iconTheme.color,

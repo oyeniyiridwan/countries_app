@@ -5,7 +5,7 @@ population, dialling code, independence, capital, currency, language e.t.c
 ## Features
  Searchable by  name of country  
  Filters countries by region, sub-region, currency, capital  
- Supports both System mode and app dark/light mode  
+ Supports both System Automatic dark mode and app dark/light mode  
 
 
 
@@ -42,7 +42,8 @@ In other to ensure smooth and responsive operation within the app.
   Filter by Languages  
   Add Voice Search  
 
-# Apk Link
+# Apk Link 
+https://drive.google.com/file/d/1qq5JuQtqHc9DKeEi77dKgISjth8vkjir/view?usp=share_link  
 
 # Appetize Link
-
+https://appetize.io/app/uj45vj37owv4uogiqxqzziyqf4?device=pixel4&osVersion=11.0&scale=75  

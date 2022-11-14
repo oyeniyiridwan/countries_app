@@ -102,7 +102,6 @@ Widget listCountry(BuildContext context, Country country) {
 }
 
 Widget buildListCountry(BuildContext context, List<Country> lists) {
-  print(lists.length);
   return ListView.builder(
     scrollDirection: Axis.vertical,
     // physics: const AlwaysScrollableScrollPhysics(),
