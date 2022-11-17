@@ -1,7 +1,7 @@
 import 'package:countries_app/View/Filter.dart';
 import 'package:countries_app/View/Languages.dart';
 import 'package:countries_app/ViewModel/Widgets.dart';
-import 'package:countries_app/View/countries.dart';
+import 'package:countries_app/Services/countries.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -124,13 +124,6 @@ class _MyHomePageState extends State<MyHomePage> {
                       contentPadding: const EdgeInsets.all(10),
                       border: InputBorder.none,
                     ),
-
-                    // onFieldSubmitted: (_) {
-                    //   setState(() {
-                    //     search = !search;
-                    //   }
-                    //   );
-                    // },
                   )),
             ),
             Padding(
@@ -144,29 +137,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     const Icon(Icons.language),
                     const Languages(),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      _textEditingController.text = "";
-                      count.onChange("");
-                      FocusScope.of(context).unfocus();
-                    },
-                    child: card(
-                        context,
-                        "Filter",
-                        const ImageIcon(AssetImage("images/filter.png")),
-                        const Filter()),
-                  )
+                  card(
+                      context,
+                      "Filter",
+                      const ImageIcon(AssetImage("images/filter.png")),
+                      const Filter())
                 ],
               ),
             ),
             SizedBox(
-              height: height - 230,
-              child: isLoading
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : buildListCountry(context, countData),
-            ),
+                height: height - 230,
+                child: isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : buildListCountry(context, countData)),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: SizedBox(

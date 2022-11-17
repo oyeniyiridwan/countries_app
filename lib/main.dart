@@ -1,6 +1,6 @@
 import 'package:countries_app/Model/Country.dart';
 import 'package:countries_app/View/Screens/Details.dart';
-import 'package:countries_app/View/countries.dart';
+import 'package:countries_app/Services/countries.dart';
 import 'package:countries_app/View/Screens/homePage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

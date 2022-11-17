@@ -183,8 +183,6 @@ class Countries with ChangeNotifier {
       _search = loadedCountry;
       notifyListeners();
       // print(loadedCountry[1].currency);
-    } catch (error) {
-      rethrow;
-    }
+    } catch (error) {}
   }
 }
