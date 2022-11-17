@@ -4,7 +4,7 @@ name: Flutter CD
 on:
   push:
     branches:
-      - main
+      - master
 permissions:
    contents: write
 
@@ -14,18 +14,10 @@ jobs:
     runs-on: ${{matrix.os}}
     strategy:
       matrix:
-        node_version: ['8', '10', '12']
         os: [ubuntu-latest, macOS-latest]
      
     steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{ matrix.node_version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node_version }}
-
-    - name: npm install, build and test
-      run: |
-        npm install
-        npm run build --if-present
-        npm test
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Release
+        uses: softprops/action-gh-release@v1
