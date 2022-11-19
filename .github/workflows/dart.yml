@@ -10,6 +10,8 @@ jobs:
   build:
     name: Run QA Tests
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false    
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
