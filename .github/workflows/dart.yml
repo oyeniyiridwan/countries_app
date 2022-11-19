@@ -16,8 +16,8 @@ jobs:
       - run: flutter pub get
         name: format all file in the libe directory
       - run: flutter format lib
-        name: Generate necessary files and delete conflicting files
-      - run: flutter pub run build_runner build --delete-conflicting-outputs
+        #name: Generate necessary files and delete conflicting files
+      #- run: flutter pub run build_runner build --delete-conflicting-outputs
         name: Analyze Code, searching for problems and errors
       - run: flutter analyze
         name: Run test written in the test folder
