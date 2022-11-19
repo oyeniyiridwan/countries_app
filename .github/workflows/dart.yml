@@ -20,8 +20,8 @@ jobs:
       #- run: flutter pub run build_runner build --delete-conflicting-outputs
         name: Analyze Code, searching for problems and errors
       - run: flutter analyze
-        name: Run test written in the test folder
-      - run: flutter test
+        #name: Run test written in the test folder
+     # - run: flutter test
         name: Build APk
       - run: flutter build apk --debug --split-per-abi
         name: Push to Releases
