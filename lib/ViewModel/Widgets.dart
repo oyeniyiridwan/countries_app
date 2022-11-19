@@ -1,4 +1,4 @@
-import 'package:countries_app/Model/Country.dart';
+import 'package:countries_app/Model/country.dart';
 import 'package:countries_app/View/Screens/Details.dart';
 import 'package:flutter/material.dart';
 

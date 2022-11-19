@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:countries_app/Model/Country.dart';
+import 'package:countries_app/Model/country.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -68,6 +68,8 @@ class Countries with ChangeNotifier {
     currencyL = [];
     notifyListeners();
   }
+
+  var currency = "";
 
   void filtered() {
     if (regionL.isEmpty) {
@@ -146,7 +148,7 @@ class Countries with ChangeNotifier {
       // print(extractData[1]["name"]["common"].toString());
       for (int i = 0; i < 25; i++) {
         List<String> language = [];
-        var currency;
+
         for (var value in extractData[i]["languages"].values) {
           language.add(value);
         }
@@ -183,6 +185,8 @@ class Countries with ChangeNotifier {
       _search = loadedCountry;
       notifyListeners();
       // print(loadedCountry[1].currency);
-    } catch (error) {}
+    } catch (error) {
+      rethrow;
+    }
   }
 }

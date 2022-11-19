@@ -1,5 +1,3 @@
-import 'package:countries_app/Model/Country.dart';
-import 'package:countries_app/View/Screens/Details.dart';
 import 'package:countries_app/Services/countries.dart';
 import 'package:countries_app/View/Screens/homePage.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +86,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color(0xffffffff),
       ),
       routes: {
-        MyHomePage.routeHomePage: (context) => MyHomePage(),
+        MyHomePage.routeHomePage: (context) => const MyHomePage(),
       },
     );
   }

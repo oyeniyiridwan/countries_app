@@ -10,39 +10,37 @@ class Languages extends StatefulWidget {
 class _LanguagesState extends State<Languages> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text("Languages"),
-                  IconButton(
-                    icon: const Icon(Icons.dangerous_sharp),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                  )
-                ],
-              ),
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Languages"),
+                IconButton(
+                  icon: const Icon(Icons.dangerous_sharp),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
             ),
-            LanguageRows(a: false, language: "Bahasa"),
-            LanguageRows(a: false, language: "Deutch"),
-            LanguageRows(a: false, language: "English"),
-            LanguageRows(a: false, language: "Español"),
-            LanguageRows(a: false, language: "Français"),
-            LanguageRows(a: false, language: "Italiano"),
-            LanguageRows(a: false, language: "Português"),
-            LanguageRows(a: false, language: "русский"),
-            LanguageRows(a: false, language: "Svenka"),
-            LanguageRows(a: false, language: "Türkçe"),
-            LanguageRows(a: false, language: ""),
-            LanguageRows(a: false, language: "العربية"),
-          ],
-        ),
+          ),
+          LanguageRows(a: false, language: "Bahasa"),
+          LanguageRows(a: false, language: "Deutch"),
+          LanguageRows(a: false, language: "English"),
+          LanguageRows(a: false, language: "Español"),
+          LanguageRows(a: false, language: "Français"),
+          LanguageRows(a: false, language: "Italiano"),
+          LanguageRows(a: false, language: "Português"),
+          LanguageRows(a: false, language: "русский"),
+          LanguageRows(a: false, language: "Svenka"),
+          LanguageRows(a: false, language: "Türkçe"),
+          LanguageRows(a: false, language: ""),
+          LanguageRows(a: false, language: "العربية"),
+        ],
       ),
     );
   }
