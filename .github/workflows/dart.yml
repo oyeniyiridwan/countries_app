@@ -1,6 +1,6 @@
 on:
   push:
-    branches:
+    branch:
       - master
 name: "Quality Assurance"
 jobs:
