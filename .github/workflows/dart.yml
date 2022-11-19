@@ -1,6 +1,6 @@
 on:
   push:
-    branch:
+    branches:
       - master
 permissions:
    contents: write
@@ -26,6 +26,7 @@ jobs:
       - run: flutter test
         name: Build APk
       - run: flutter build apk --debug --split-per-abi
+        name: Push to Releases
       - run: |
           flutter build ios --no-codesign
           cd build/ios/iphoneos
@@ -34,9 +35,5 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
-        name: Push to Releases
-        uses: ncipollo/release-action@v1
-        with:
-          artifacts: "build/app/outputs/apk/debug/*,build/ios/iphoneos/app.ipa"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
