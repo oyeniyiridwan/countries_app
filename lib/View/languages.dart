@@ -28,18 +28,18 @@ class _LanguagesState extends State<Languages> {
               ],
             ),
           ),
-          LanguageRows(a: false, language: "Bahasa"),
-          LanguageRows(a: false, language: "Deutch"),
-          LanguageRows(a: false, language: "English"),
-          LanguageRows(a: false, language: "Español"),
-          LanguageRows(a: false, language: "Français"),
-          LanguageRows(a: false, language: "Italiano"),
-          LanguageRows(a: false, language: "Português"),
-          LanguageRows(a: false, language: "русский"),
-          LanguageRows(a: false, language: "Svenka"),
-          LanguageRows(a: false, language: "Türkçe"),
-          LanguageRows(a: false, language: ""),
-          LanguageRows(a: false, language: "العربية"),
+          const LanguageRows(a: false, language: "Bahasa"),
+          const LanguageRows(a: false, language: "Deutch"),
+          const LanguageRows(a: false, language: "English"),
+          const LanguageRows(a: false, language: "Español"),
+          const LanguageRows(a: false, language: "Français"),
+          const LanguageRows(a: false, language: "Italiano"),
+          const LanguageRows(a: false, language: "Português"),
+          const LanguageRows(a: false, language: "русский"),
+          const LanguageRows(a: false, language: "Svenka"),
+          const LanguageRows(a: false, language: "Türkçe"),
+          const LanguageRows(a: false, language: ""),
+          const LanguageRows(a: false, language: "العربية"),
         ],
       ),
     );
@@ -49,7 +49,7 @@ class _LanguagesState extends State<Languages> {
 class LanguageRows extends StatefulWidget {
   final String language;
   final bool a;
-  LanguageRows({required this.a, required this.language, Key? key})
+  const LanguageRows({required this.a, required this.language, Key? key})
       : super(key: key);
 
   @override
