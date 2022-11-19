@@ -47,8 +47,8 @@ class _LanguagesState extends State<Languages> {
 }
 
 class LanguageRows extends StatefulWidget {
-  String language;
-  bool a;
+  final String language;
+  final bool a;
   LanguageRows({required this.a, required this.language, Key? key})
       : super(key: key);
 
@@ -72,14 +72,7 @@ class _LanguageRowsState extends State<LanguageRows> {
                   color: Theme.of(context).disabledColor,
                   fontWeight: FontWeight.normal),
             ),
-            IconButton(
-                icon:
-                    Icon(widget.a ? Icons.circle_sharp : Icons.circle_outlined),
-                onPressed: () {
-                  setState(() {
-                    widget.a = !widget.a;
-                  });
-                })
+            Icon(widget.a ? Icons.circle_sharp : Icons.circle_outlined),
           ],
         ),
       ),
