@@ -1,17 +1,14 @@
-
 on:
-  pull_request:
   push:
     branches:
       - master
-      
+permissions:
+   contents: write
 name: "Quality Assurance"
 jobs:
   build:
     name: Run QA Tests
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false    
     steps:
       - uses: actions/checkout@v3
       - uses: subosito/flutter-action@v2
@@ -29,3 +26,14 @@ jobs:
       - run: flutter test
         name: Build APk
       - run: flutter build apk --debug --split-per-abi
+        name: Push to Releases
+      - run: |
+          flutter build ios --no-codesign
+          cd build/ios/iphoneos
+          mkdir Payload
+          cd Payload
+          ln -s ../Runner.app
+          cd ..
+          zip -r app.ipa Payload
+          tag: v1.0.${{ github.run_number }}
+          token: ${{ secrets.TOKEN }}
