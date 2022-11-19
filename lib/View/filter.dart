@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:countries_app/Services/countries.dart';
-import 'package:countries_app/ViewModel/moreWidgets.dart';
+import 'package:countries_app/ViewModel/more_widgets.dart';
 import 'package:provider/provider.dart';
 
 class Filter extends StatefulWidget {

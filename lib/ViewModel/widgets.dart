@@ -1,5 +1,5 @@
 import 'package:countries_app/Model/country.dart';
-import 'package:countries_app/View/Screens/Details.dart';
+import 'package:countries_app/View/Screens/details.dart';
 import 'package:flutter/material.dart';
 
 Widget card(BuildContext context, String title, Widget icon, Widget build) {

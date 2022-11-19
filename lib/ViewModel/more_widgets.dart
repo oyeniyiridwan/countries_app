@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class FilteredSelectionRows extends StatefulWidget {
-  String location;
-  int index;
-  List<String> lists;
-  FilteredSelectionRows(
+  final String location;
+  final int index;
+  final List<String> lists;
+  const FilteredSelectionRows(
       {required this.lists,
       required this.location,
       required this.index,

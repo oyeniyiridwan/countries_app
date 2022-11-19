@@ -1,5 +1,5 @@
-import 'package:countries_app/View/Filter.dart';
-import 'package:countries_app/View/Languages.dart';
+import 'package:countries_app/View/filter.dart';
+import 'package:countries_app/View/languages.dart';
 import 'package:countries_app/ViewModel/Widgets.dart';
 import 'package:countries_app/Services/countries.dart';
 import 'package:flutter/material.dart';
