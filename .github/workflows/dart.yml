@@ -1,9 +1,10 @@
+
 on:
   pull_request:
   push:
     branches:
-      - main
-      - dev
+      - master
+      
 name: "Quality Assurance"
 jobs:
   build:
