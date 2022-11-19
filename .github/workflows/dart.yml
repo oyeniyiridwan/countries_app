@@ -1,5 +1,4 @@
 on:
-  pull_request:
   push:
     branches:
       - master
@@ -39,4 +38,4 @@ jobs:
           artifacts: "build/app/outputs/apk/debug/*,build/ios/iphoneos/app.ipa"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
-​
+.
