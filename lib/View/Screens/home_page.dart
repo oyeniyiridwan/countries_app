@@ -1,6 +1,6 @@
 import 'package:countries_app/View/filter.dart';
 import 'package:countries_app/View/languages.dart';
-import 'package:countries_app/ViewModel/Widgets.dart';
+import 'package:countries_app/ViewModel/widgets.dart';
 import 'package:countries_app/Services/countries.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,8 +36,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
     super.initState();
   }
-
-  final TextEditingController _textEditingController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
