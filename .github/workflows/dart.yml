@@ -16,12 +16,10 @@ jobs:
       - run: flutter pub get
         name: format all file in the libe directory
       - run: flutter format lib
+        name: Generate necessary files and delete conflicting files
+      - run: flutter pub run build_runner build --delete-conflicting-outputs
         name: Analyze Code, searching for problems and errors
       - run: flutter analyze
-        name: Generate necessary files and delete conflicting files
-      - run: flutter packages pub run build_runner build --delete-conflicting-outputs
-        name: Track changes made on a file
-      - run: git diff
         name: Run test written in the test folder
       - run: flutter test
         name: Build APk
@@ -35,5 +33,9 @@ jobs:
           ln -s ../Runner.app
           cd ..
           zip -r app.ipa Payload
+        
+      - uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/debug/*,build/ios/iphoneos/app.ipa"
           tag: v1.0.${{ github.run_number }}
           token: ${{ secrets.TOKEN }}
