@@ -25,7 +25,7 @@ jobs:
         name: Build APk
       - run: flutter build apk --debug --split-per-abi
         name: Upload Apk
-      - uses: action/upload-artifact@v2 
+      - uses: actions/upload-artifact@v2 
         with: 
           name: apk
           path: build/app/outputs/flutter-apk/app.apk
