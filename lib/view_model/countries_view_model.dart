@@ -1,15 +1,18 @@
 import 'dart:convert';
-import 'package:countries_app/Model/country.dart';
+import 'package:countries_app/Model/country_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-class Countries with ChangeNotifier {
+class CountriesViewModel with ChangeNotifier {
   List<Country> _items = [];
   List<Country> _filtered = [];
   List<Country> _search = [];
   List<Country> get items {
     return [..._search];
   }
+  bool _isLoading = true;
+  bool get isLoading =>_isLoading;
+
 
   bool _isDarkMode = true;
   get isDarkMode {
@@ -81,37 +84,37 @@ class Countries with ChangeNotifier {
         _filtered.addAll(_items.where((country) {
           return country.region == regionL[i];
         }).toList());
-        _filtered.sort((a, b) => a.name.compareTo(b.name));
+        _filtered.sort((a, b) => a.name!.common.toString().compareTo(b.name!.common.toString()));
       }
     }
     if (subRegionL.isNotEmpty) {
       List<Country> temp = [];
       for (int j = 0; j < subRegionL.length; j++) {
         temp.addAll(_filtered.where((country) {
-          return country.subRegion == subRegionL[j];
+          return country.subregion == subRegionL[j];
         }).toList());
       }
-      temp.sort((a, b) => a.name.compareTo(b.name));
+      temp.sort((a, b) => a.name!.common.toString().compareTo(b.name!.common.toString()));
       _filtered = temp;
     }
     if (capitalL.isNotEmpty) {
       List<Country> temp = [];
       for (int k = 0; k < capitalL.length; k++) {
         temp.addAll(_filtered.where((country) {
-          return country.capital == capitalL[k];
+          return country.capital?[0] == capitalL[k];
         }).toList());
       }
-      temp.sort((a, b) => a.name.compareTo(b.name));
+      temp.sort((a, b) => a.name!.common.toString().compareTo(b.name!.common.toString()));
       _filtered = temp;
     }
     if (currencyL.isNotEmpty) {
       List<Country> temp = [];
       for (int l = 0; l < currencyL.length; l++) {
         temp.addAll(_filtered.where((country) {
-          return country.currency == currencyL[l];
+          return country.currencies == currencyL[l];
         }).toList());
       }
-      temp.sort((a, b) => a.name.compareTo(b.name));
+      temp.sort((a, b) => a.name!.common.toString().compareTo(b.name!.common.toString()));
       _filtered = temp;
     }
     _search = _filtered;
@@ -123,68 +126,31 @@ class Countries with ChangeNotifier {
       _search = _filtered;
     } else {
       _search = _filtered.where((country) {
-        return country.name.toLowerCase().contains(value.toLowerCase());
+        return country.name!.common.toString().toLowerCase().contains(value.toLowerCase());
       }).toList();
     }
     notifyListeners();
 
-    // setState(() {
-    //   result = temp;
-    // });
-    // print(result.length);
   }
 
   Future<void> fetchCountries() async {
     final url = Uri.parse("https://restcountries.com/v3.1/all");
     final List<Country> loadedCountry = [];
     try {
-      // final response = await dio.get("https://restcountries.com/v3.1/all");
       final response = await http.get(url);
       final extractData = json.decode(response.body.toString());
       if (extractData.toString() == "") {
         return;
       }
 
-      // print(extractData[1]["name"]["common"].toString());
-      for (int i = 0; i < 25; i++) {
-        List<String> language = [];
-
-        for (var value in extractData[i]["languages"].values) {
-          language.add(value);
-        }
-        language.removeLast();
-
-        for (var value in extractData[i]["currencies"].values) {
-          currency = value["name"]!;
-        }
-
-        loadedCountry.add(Country(
-            name: extractData[i]["name"]["common"],
-            capital: extractData[i]["capital"][0],
-            timezones: extractData[i]["timezones"][0],
-            currency: currency,
-            region: extractData[i]["region"],
-            subRegion: extractData[i]["subregion"],
-            population: extractData[i]["population"],
-            area: extractData[i]["area"],
-            dialingCode: extractData[i]["idd"]["root"] +
-                extractData[i]["idd"]["suffixes"][0],
-            carSide: extractData[i]["car"]["side"],
-            ethic: extractData[i]["demonyms"]["eng"]["f"],
-            language: language,
-            independent: extractData[i]["independent"],
-            imageUrl: [
-              extractData[i]["flags"]["png"],
-              extractData[i]["coatOfArms"]["png"].toString(),
-              // extractData[i]["maps"]["googleMaps"],
-            ]));
+      for (var item in extractData){
+        loadedCountry.add(Country.fromJson(item));
       }
-      loadedCountry.sort((a, b) => a.name.compareTo(b.name));
+      loadedCountry.sort((a,b) => a.name!.common.toString().compareTo(b.name!.common.toString()));
       _items = loadedCountry;
       _filtered = loadedCountry;
       _search = loadedCountry;
       notifyListeners();
-      // print(loadedCountry[1].currency);
     } catch (error) {
       rethrow;
     }

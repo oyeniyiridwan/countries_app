@@ -1,5 +1,5 @@
-import 'package:countries_app/Services/countries.dart';
 import 'package:countries_app/View/Screens/home_page.dart';
+import 'package:countries_app/view_model/countries_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +9,7 @@ void main() {
     /// can use [MyApp] while mocking the providers
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => Countries()),
+        ChangeNotifierProvider(create: (_) => CountriesViewModel()),
       ],
       child: const MyApp(),
     ),
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<Countries>(context);
+    final themeProvider = Provider.of<CountriesViewModel>(context);
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,

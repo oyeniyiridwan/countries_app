@@ -1,7 +1,7 @@
-import 'package:countries_app/View/filter.dart';
-import 'package:countries_app/View/languages.dart';
-import 'package:countries_app/ViewModel/widgets.dart';
-import 'package:countries_app/Services/countries.dart';
+import 'package:countries_app/Utils/widgets.dart';
+import 'package:countries_app/View/overlays/filter.dart';
+import 'package:countries_app/View/overlays/languages.dart';
+import 'package:countries_app/view_model/countries_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
       setState(() {
         isLoading = true;
       });
-      Provider.of<Countries>(context, listen: false)
+      Provider.of<CountriesViewModel>(context, listen: false)
           .fetchCountries()
           .then((value) {
         setState(() {
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    final count = Provider.of<Countries>(context, listen: true);
+    final count = Provider.of<CountriesViewModel>(context, listen: true);
     final countData = count.items;
 
     return Scaffold(
@@ -48,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30, right: 10, left: 10),
+              padding: const EdgeInsets.only(top: 40, right: 10, left: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -106,8 +106,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     onChanged: (value) {
                       count.onChange(value);
                     },
-                    // autofocus: false,
-                    // controller: _textEditingController,
                     cursorColor: Theme.of(context).iconTheme.color,
                     decoration: InputDecoration(
                       icon: Padding(

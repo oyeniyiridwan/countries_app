@@ -1,4 +1,4 @@
-import 'package:countries_app/Services/countries.dart';
+import 'package:countries_app/view_model/countries_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,7 @@ class FilteredSelectionRows extends StatefulWidget {
 class _FilteredSelectionRowsState extends State<FilteredSelectionRows> {
   @override
   Widget build(BuildContext context) {
-    final count = Provider.of<Countries>(context, listen: true);
+    final count = Provider.of<CountriesViewModel>(context, listen: true);
     return SizedBox(
       height: 35,
       child: Padding(

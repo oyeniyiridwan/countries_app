@@ -1,6 +1,6 @@
+import 'package:countries_app/Utils/more_widgets.dart';
+import 'package:countries_app/view_model/countries_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:countries_app/Services/countries.dart';
-import 'package:countries_app/ViewModel/more_widgets.dart';
 import 'package:provider/provider.dart';
 
 class Filter extends StatefulWidget {
@@ -18,7 +18,7 @@ bool currency = false;
 class _FilterState extends State<Filter> {
   @override
   Widget build(BuildContext context) {
-    final count = Provider.of<Countries>(context, listen: true);
+    final count = Provider.of<CountriesViewModel>(context, listen: true);
     final width = MediaQuery.of(context).size.width;
     return SingleChildScrollView(
       child: Column(
@@ -195,7 +195,7 @@ class _FilterState extends State<Filter> {
               FilteredSelectionRows(
                   index: 19,
                   lists: count.currencyL,
-                  location: "United State dollar")
+                  location: "United States dollar")
             ]),
           const SizedBox(
             height: 10,

@@ -1,4 +1,4 @@
-import 'package:countries_app/Model/country.dart';
+import 'package:countries_app/Model/country_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -15,19 +15,15 @@ class _DetailPageState extends State<DetailPage> {
   List<String> pics = [];
 
   int _currentIndex = 0;
-  String language = "";
   @override
   void initState() {
-    for (int i = 0; i < 2; i++) {
-      pics.add(widget.country.imageUrl[i]!);
-    }
+      pics.add( widget.country.flags?.png ?? widget.country.flags!.svg.toString(),);
+      var check = widget.country.coatOfArms?.png ?? widget.country.coatOfArms!.svg.toString();
+      print(check);
+      if (!check.contains('null')){
+      pics.add(check);}
 
-    for (int p = 0; p < (widget.country.language.length); p++) {
-      language = "$language ${widget.country.language[p]}";
-      if (p < widget.country.language.length - 1) {
-        language = "$language,";
-      }
-    }
+
     super.initState();
   }
 
@@ -36,6 +32,7 @@ class _DetailPageState extends State<DetailPage> {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [
           SizedBox(
@@ -47,7 +44,7 @@ class _DetailPageState extends State<DetailPage> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(top: 20),
+                    padding: const EdgeInsets.only(top: 30),
                     child: SizedBox(
                       height: 80,
                       child: Row(
@@ -63,9 +60,9 @@ class _DetailPageState extends State<DetailPage> {
                               Navigator.pop(context);
                             },
                           ),
-                          Text(widget.country.name,
+                          Text(widget.country.name!.common.toString(),
                               style: Theme.of(context).textTheme.titleMedium),
-                          const SizedBox(width: 50),
+                          const SizedBox(width: 30),
                         ],
                       ),
                     ),
@@ -147,24 +144,15 @@ class _DetailPageState extends State<DetailPage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    ".",
-                                    style: TextStyle(
-                                        fontSize: 50,
-                                        color: _currentIndex == 0
-                                            ? Colors.white
-                                            : Colors.white54),
-                                  ),
-                                  Text(
-                                    ".",
-                                    style: TextStyle(
-                                        fontSize: 50,
-                                        color: _currentIndex == 1
-                                            ? Colors.white
-                                            : Colors.white38),
-                                  )
-                                ],
+                                children: pics.map((e) => Text(
+                                  ".",
+                                  style: TextStyle(
+                                      fontSize: 50,
+                                      color: _currentIndex == pics.indexOf(e)
+                                          ? Colors.black
+                                          : Colors.grey),
+                                ),
+                                ).toList()
                               ),
                             )
                           ],
@@ -172,15 +160,15 @@ class _DetailPageState extends State<DetailPage> {
                   ),
                   details(context, "Population",
                       widget.country.population.toString()),
-                  details(context, "Region", widget.country.region),
-                  details(context, "Capital", widget.country.capital),
+                  details(context, "Region", widget.country.region.toString()),
+                  details(context, "Capital", widget.country.capital?[0] ?? 'null'),
                   details(context, "Sub-region",
-                      widget.country.subRegion.toString()),
+                      widget.country.subregion.toString()),
                   const SizedBox(
                     height: 25,
                   ),
-                  details(context, "Official language", language),
-                  details(context, "Ethic group", widget.country.ethic),
+                  details(context, "Official language", widget.country.languages?.eng??''),
+                  details(context, "Ethic group", widget.country.demonyms?.eng?.official??''),
                   const SizedBox(
                     height: 20,
                   ),
@@ -188,14 +176,14 @@ class _DetailPageState extends State<DetailPage> {
                       widget.country.independent.toString()),
                   details(context, "Area", widget.country.area.toString()),
                   details(
-                      context, "Currency", widget.country.currency.toString()),
+                      context, "Currency", widget.country.currencies.toString()),
                   const SizedBox(
                     height: 20,
                   ),
-                  details(context, "Time zone", widget.country.timezones),
+                  details(context, "Time zone", widget.country.timezones?[0]?? ''),
                   details(context, "Date format", "dd/mm/yyyy"),
-                  details(context, "Dialing code", widget.country.dialingCode),
-                  details(context, "Driving side", widget.country.carSide),
+                  details(context, "Dialing code", '${widget.country.idd?.root??''}${widget.country.idd?.suffixes?[0]??''}'),
+                  details(context, "Driving side", widget.country.car?.side ?? ''),
                   const SizedBox(
                     height: 20,
                   ),
